@@ -1,18 +1,14 @@
-const fs = require('fs');
+var http = require("http");
 
-/* The fs.writeFileSync method is used
-to write something to the file, but if
-the file does not exist, it creates new
-files along with writing the contents */
-fs.writeFileSync('./testfile', 'This is a new file');
-var file_content = fs.readFileSync(
-                './testfile', 'utf8').toString();
+http.createServer(function (request, response) {
+   // Send the HTTP header 
+   // HTTP Status: 200 : OK
+   // Content Type: text/plain
+   response.writeHead(200, {'Content-Type': 'text/plain'});
+   
+   // Send the response body as "Hello World"
+   response.end('Hello World\n');
+}).listen(8081);
 
-console.log(file_content);
-
-/* The fs.appendFileSync method is used
-for updating the data of a file */
-fs.appendFileSync('./testfile', " Updated Data");
-file_content = fs.readFileSync(
-        './testfile', 'utf8').toString();
-console.log(file_content);
+// Console will print the message
+console.log('Server running at http://127.0.0.1:8081/');
